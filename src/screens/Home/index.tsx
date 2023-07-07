@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Image, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { Background } from '../../components/Background';
 import { Heading } from '../../components/Heading';
 import { GameCard, GameCardProps } from '../../components/GameCard';
 
@@ -19,20 +20,22 @@ export function Home() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Image source={logoImg} style={styles.logo} />
-      <Heading
-        title="Find your duo!"
-        subtitle="Choose what game you want to play..."
-      />
-      <FlatList
-        data={games}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <GameCard data={item} />}
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        contentContainerStyle={styles.contentList}
-      />
-    </SafeAreaView>
+    <Background>
+      <SafeAreaView style={styles.container}>
+        <Image source={logoImg} style={styles.logo} />
+        <Heading
+          title="Find your duo!"
+          subtitle="Choose what game you want to play..."
+        />
+        <FlatList
+          data={games}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <GameCard data={item} />}
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          contentContainerStyle={styles.contentList}
+        />
+      </SafeAreaView>
+    </Background>
   );
 }
