@@ -7,6 +7,7 @@ import { Entypo } from '@expo/vector-icons';
 import { Background } from '../../components/Background';
 import { Heading } from '../../components/Heading';
 import { DuoCard, DuoCardProps } from '../../components/DuoCard';
+import { DuoMatch } from '../../components/DuoMatch';
 
 import logoImg from '../../assets/logo-nlw-esports.png';
 
@@ -18,6 +19,8 @@ import { GameParams } from '../../@types/navigation';
 
 export function Game() {
   const [duos, setDuos] = useState<DuoCardProps[]>([]);
+
+  const [discordDuoSelected, setDiscordDuoSelected] = useState('');
 
   const route = useRoute();
 
@@ -70,6 +73,11 @@ export function Game() {
           ListEmptyComponent={() => (
             <Text style={styles.emptyListText}>No ads published yet</Text>
           )}
+        />
+        <DuoMatch
+          visible={discordDuoSelected.length > 0}
+          discord="johndoe#1276"
+          onClose={() => setDiscordDuoSelected('')}
         />
       </SafeAreaView>
     </Background>
