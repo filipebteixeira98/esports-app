@@ -1,6 +1,16 @@
-import { View, Modal, ModalProps, Text, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
+import {
+  View,
+  Modal,
+  ModalProps,
+  Text,
+  TouchableOpacity,
+  Alert,
+  ActivityIndicator,
+} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { CheckCircle } from 'phosphor-react-native';
+import * as Clipboard from 'expo-clipboard';
 
 import { Heading } from '../Heading';
 
@@ -14,6 +24,21 @@ interface Props extends ModalProps {
 }
 
 export function DuoMatch({ discord, onClose, ...rest }: Props) {
+  const [isCopping, setIsCopping] = useState(false);
+
+  async function handleCopyDiscordToClipboard() {
+    setIsCopping(true);
+
+    await Clipboard.setStringAsync(discord);
+
+    Alert.alert(
+      'Discord copied!',
+      'User copied for you to put on discord and find that person!'
+    );
+
+    setIsCopping(false);
+  }
+
   return (
     <Modal animationType="fade" transparent statusBarTranslucent {...rest}>
       <View style={styles.container}>
@@ -32,8 +57,18 @@ export function DuoMatch({ discord, onClose, ...rest }: Props) {
             style={{ alignItems: 'center', marginTop: 24 }}
           />
           <Text style={styles.label}>Add on Discord</Text>
-          <TouchableOpacity style={styles.discordButton}>
-            <Text style={styles.discord}>{discord}</Text>
+          <TouchableOpacity
+            onPress={handleCopyDiscordToClipboard}
+            style={styles.discordButton}
+            disabled={isCopping}
+          >
+            <Text style={styles.discord}>
+              {isCopping ? (
+                <ActivityIndicator color={THEME.COLORS.PRIMARY} />
+              ) : (
+                discord
+              )}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
