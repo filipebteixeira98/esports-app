@@ -13,6 +13,7 @@ import { Background } from './src/components/Background';
 import { Loading } from './src/components/Loading';
 
 import './src/services/notificationConfig';
+import './src/services/getPushNotificationToken';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
