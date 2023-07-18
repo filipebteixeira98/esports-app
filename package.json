@@ -29,7 +29,8 @@
     "expo-notifications": "~0.16.1",
     "expo-modules-core": "~0.11.10",
     "expo-auth-session": "~3.7.4",
-    "expo-crypto": "~11.0.0"
+    "expo-crypto": "~11.0.0",
+    "expo-random": "~12.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
